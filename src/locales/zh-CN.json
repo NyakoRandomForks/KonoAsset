@@ -311,12 +311,6 @@
     "preference:settings:theme:light": "浅色",
     "preference:settings:theme:dark": "深色",
 
-    "preference:settings:update-channel": "更新渠道",
-    "preference:settings:update-channel:explanation-text-1": "选择更新获取渠道",
-    "preference:settings:update-channel:explanation-text-2": "预发布版包含最新功能但可能有更多错误",
-    "preference:settings:update-channel:stable": "稳定版（推荐）",
-    "preference:settings:update-channel:pre-release": "预发布版（实验性）",
-
     "preference:settings:use-unitypackage-selector": "优先打开Unitypackage文件",
     "preference:settings:use-unitypackage-selector:explanation-text": "启用后点击「打开」按钮将优先选择Unitypackage文件，存在多个文件时会弹出选择框",
 
@@ -338,25 +332,6 @@
     "preference:thumbnail-optimizer:dialog:running": "正在运行",
     "preference:thumbnail-optimizer:dialog:start": "开始",
     "preference:thumbnail-optimizer:dialog:completed": "优化完成！",
-
-    "top:new-update-toast": "有新版本可用！",
-    "top:new-update-toast:description": "本次更新包含错误修复、新功能等内容",
-    "top:new-update-toast:button": "立即更新",
-    "top:new-update-toast:close": "暂不更新",
-
-    "top:update-dialog:title": "准备更新",
-    "top:update-dialog:description": "正在下载更新...",
-    "top:update-dialog:downloading:foretext": "下载中（",
-    "top:update-dialog:downloading:posttext": "%）",
-    "top:update-dialog:download-complete": "更新已下载",
-    "top:update-dialog:execute": "更新",
-
-    "top:update-dialog:changelog:title": "更新日志",
-    "top:update-dialog:changelog:not-found": "无更新日志",
-    "top:update-dialog:changelog:github": "在GitHub查看变更",
-    "top:update-dialog:changelog:prefix:new-feature": "新功能",
-    "top:update-dialog:changelog:prefix:bug-fixes": "错误修复",
-    "top:update-dialog:changelog:prefix:others": "其他",
 
     "top:add-text": "拖放文件以添加资产",
 

@@ -11,7 +11,7 @@ use deep_link::{
 use definitions::entities::{InitialSetup, LoadResult, ProgressEvent};
 use file::modify_guard::{self, FileTransferGuard};
 use language::LocalizationData;
-use model::preference::{PreferenceStore, UpdateChannel};
+use model::preference::PreferenceStore;
 use state::StateHandler;
 use statistics::{AssetVolumeEstimatedEvent, AssetVolumeStatisticsCache};
 use storage::{asset_storage::AssetStorage, delete::delete_temporary_images};
@@ -165,17 +165,13 @@ pub fn run() {
             };
 
             let data_dir = pref_store.get_data_dir().clone();
-            let update_channel = pref_store.update_channel.clone();
             let state_handler = StateHandler::load_or_default(state_file_path);
 
             let pximg_resolver = PximgResolver::new(data_dir.join("images"), VERSION);
 
             app.manage(arc_mutex(pref_store));
             app.manage(arc_mutex(pximg_resolver));
-            app.manage(arc_mutex(get_update_handler(
-                app.handle().clone(),
-                &update_channel,
-            )));
+            app.manage(arc_mutex(get_update_handler(app.handle().clone())));
             app.manage(arc_mutex(state_handler));
 
             let store_provider = match load_store_provider(&data_dir, &app_local_data_dir) {
@@ -213,21 +209,8 @@ where
     }
 }
 
-fn get_update_handler(app: AppHandle, channel: &UpdateChannel) -> UpdateHandler {
-    tauri::async_runtime::block_on(async move {
-        let mut update_handler = UpdateHandler::new(app);
-        // E2E startup must not depend on the release server or show update dialogs.
-        if cfg!(feature = "e2e") {
-            return update_handler;
-        }
-        let result = update_handler.check_for_update(channel).await;
-
-        if let Err(err) = result {
-            log::error!("Failed to check for update: {}", err);
-        }
-
-        update_handler
-    })
+fn get_update_handler(app: AppHandle) -> UpdateHandler {
+    UpdateHandler::new(app)
 }
 
 fn load_preference_store(

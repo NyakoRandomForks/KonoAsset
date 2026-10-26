@@ -1,5 +1,6 @@
 use std::sync::Arc;
 
+use model::preference::PreferenceStore;
 use task::TaskContainer;
 use tauri::State;
 use tokio::sync::Mutex;
@@ -11,14 +12,23 @@ use crate::updater::update_handler::UpdateHandler;
 #[specta::specta]
 pub async fn check_for_update(
     update_handler: State<'_, Arc<Mutex<UpdateHandler>>>,
+    preference: State<'_, Arc<Mutex<PreferenceStore>>>,
 ) -> Result<bool, String> {
-    let handler = update_handler.lock().await;
+    let update_channel = {
+        let preference = preference.lock().await;
+        preference.update_channel.clone()
+    };
 
-    if !handler.is_initialized() {
-        let err = "Update handler is not initialized yet.".to_string();
-        log::error!("{}", err);
-        return Err(err);
-    }
+    let mut handler = update_handler.lock().await;
+
+    handler
+        .check_for_update(&update_channel)
+        .await
+        .map_err(|e| {
+            let err = format!("Failed to check for update: {:?}", e);
+            log::error!("{}", err);
+            err
+        })?;
 
     if !handler.show_notification().await {
         return Ok(false);

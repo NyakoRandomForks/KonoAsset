@@ -324,12 +324,6 @@
     "preference:settings:theme:light": "ライト",
     "preference:settings:theme:dark": "ダーク",
 
-    "preference:settings:update-channel": "アップデートチャンネル",
-    "preference:settings:update-channel:explanation-text-1": "アップデートを受け取るチャンネルを指定します",
-    "preference:settings:update-channel:explanation-text-2": "Pre-Releaseチャンネルでは最新の機能が素早く得られる代わりに、バグが混入しやすくなります",
-    "preference:settings:update-channel:stable": "Stable (安定版)",
-    "preference:settings:update-channel:pre-release": "Pre-Release (非安定版)",
-
     "preference:settings:use-unitypackage-selector": "Unitypackageを優先して開く",
     "preference:settings:use-unitypackage-selector:explanation-text": "この設定が有効の場合「開く」ボタンを押したときにUnitypackageが選択された状態で開いたり、複数ある場合は利用するファイルを選ぶダイアログが表示されたりします",
 
@@ -338,25 +332,6 @@
 
     "preference:settings:use-trash-bin-selector": "ゴミ箱を使用する",
     "preference:settings:use-trash-bin-selector:explanation-text": "この設定が有効の場合、ファイルを削除するときにゴミ箱に移動されるようになります",
-
-    "top:new-update-toast": "新しいアップデートがあります！",
-    "top:new-update-toast:description": "アップデートにはバグ修正、機能追加などが含まれます",
-    "top:new-update-toast:button": "アップデートする",
-    "top:new-update-toast:close": "今はしない",
-
-    "top:update-dialog:title": "アップデートを準備中",
-    "top:update-dialog:description": "アップデートをダウンロードしています...",
-    "top:update-dialog:downloading:foretext": "ダウンロード中 (",
-    "top:update-dialog:downloading:posttext": "%)",
-    "top:update-dialog:download-complete": "アップデートをダウンロード済み",
-    "top:update-dialog:execute": "アップデート",
-
-    "top:update-dialog:changelog:title": "変更履歴",
-    "top:update-dialog:changelog:not-found": "変更履歴はありません",
-    "top:update-dialog:changelog:github": "GitHubで変更履歴を見る",
-    "top:update-dialog:changelog:prefix:new-feature": "新機能",
-    "top:update-dialog:changelog:prefix:bug-fixes": "バグ修正",
-    "top:update-dialog:changelog:prefix:others": "その他",
 
     "top:add-text": "ファイルをドロップしてアセットを追加",
 

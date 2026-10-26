@@ -311,12 +311,6 @@
     "preference:settings:theme:light": "Light",
     "preference:settings:theme:dark": "Dark",
 
-    "preference:settings:update-channel": "Update channel",
-    "preference:settings:update-channel:explanation-text-1": "Specify the channel for receiving updates",
-    "preference:settings:update-channel:explanation-text-2": "The Pre-Release channel provides the latest features quickly but is more prone to bugs",
-    "preference:settings:update-channel:stable": "Stable (recommended)",
-    "preference:settings:update-channel:pre-release": "Pre-Release (experimental)",
-
     "preference:settings:use-unitypackage-selector": "Prioritise opening Unitypackage files",
     "preference:settings:use-unitypackage-selector:explanation-text": "If this setting is enabled, pressing the 'Open' button will select Unitypackage files by default, and if multiple files exist, a selection dialog will appear",
 
@@ -338,25 +332,6 @@
     "preference:thumbnail-optimizer:dialog:running": "Running",
     "preference:thumbnail-optimizer:dialog:start": "Start",
     "preference:thumbnail-optimizer:dialog:completed": "Optimisation completed!",
-
-    "top:new-update-toast": "A new update is available!",
-    "top:new-update-toast:description": "This update includes bug fixes, new features, and more",
-    "top:new-update-toast:button": "Update now",
-    "top:new-update-toast:close": "Not now",
-
-    "top:update-dialog:title": "Preparing update",
-    "top:update-dialog:description": "Downloading update...",
-    "top:update-dialog:downloading:foretext": "Downloading (",
-    "top:update-dialog:downloading:posttext": "%)",
-    "top:update-dialog:download-complete": "Update downloaded",
-    "top:update-dialog:execute": "Update",
-
-    "top:update-dialog:changelog:title": "Changelog",
-    "top:update-dialog:changelog:not-found": "No changelog available",
-    "top:update-dialog:changelog:github": "View changes on GitHub",
-    "top:update-dialog:changelog:prefix:new-feature": "New features",
-    "top:update-dialog:changelog:prefix:bug-fixes": "Bug fixes",
-    "top:update-dialog:changelog:prefix:others": "Others",
 
     "top:add-text": "Drop files to add assets",
 
