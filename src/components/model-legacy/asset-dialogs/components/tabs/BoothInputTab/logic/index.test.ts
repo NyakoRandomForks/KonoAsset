@@ -13,6 +13,8 @@ const mockAssetSummary: AssetSummary = {
   boothItemId: 123,
   imageFilename: 'imageFilename',
   publishedAt: 123,
+  category: null,
+  tags: [],
 }
 
 const mockBoothAssetInfo: BoothAssetInfo = {

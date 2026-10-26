@@ -1,0 +1,1 @@
+export { AssetCardCategoryBadge } from './AssetCardCategoryBadge'

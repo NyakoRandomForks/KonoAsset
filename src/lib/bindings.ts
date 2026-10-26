@@ -133,6 +133,8 @@ export type AssetSummary = {
 	dependencies: string[],
 	boothItemId: number | null,
 	publishedAt: number | null,
+	category: string | null,
+	tags: string[],
 };
 
 export type AssetType = "Avatar" | "AvatarWearable" | "WorldObject" | "OtherAsset";

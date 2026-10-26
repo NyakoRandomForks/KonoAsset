@@ -15,6 +15,8 @@ const EXAMPLE_DEPENDENCIES: AssetSummary = {
   boothItemId: 6641548,
   dependencies: [],
   publishedAt: 0,
+  category: null,
+  tags: [],
 }
 
 const meta = {

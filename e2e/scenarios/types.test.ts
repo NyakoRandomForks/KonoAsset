@@ -4,7 +4,7 @@ import { library } from '../fixtures.ts'
 import { card, clearFilters, expectAssets } from '../ui.ts'
 
 test(
-  'タイプとカードのショップ・タイプから目的のアセットを絞り込める',
+  'タイプとカードのカテゴリ・タイプから目的のアセットを絞り込める',
   { timeout: 90_000 },
   async (t) => {
     const { browser } = await startApp(t, { initialData: library })
@@ -19,8 +19,8 @@ test(
       await browser.$(`[role="radio"][value="${type}"]`).click()
       await expectAssets(browser, [...names])
     }
-    await browser.$(card('Coat')).$('p=Maple-B').click()
-    await expectAssets(browser, ['Coat'])
+    await browser.$(card('Coat')).$('span=衣装').click()
+    await expectAssets(browser, ['Blouse', 'Coat'])
     await clearFilters(browser)
     await browser.$(card('Desk')).$('span=ワールドアセット').click()
     await expectAssets(browser, ['Desk'])

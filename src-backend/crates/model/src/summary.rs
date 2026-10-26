@@ -15,6 +15,8 @@ pub struct AssetSummary {
     pub dependencies: Vec<Uuid>,
     pub booth_item_id: Option<u64>,
     pub published_at: Option<i64>,
+    pub category: Option<String>,
+    pub tags: Vec<String>,
 }
 
 impl From<Avatar> for AssetSummary {
@@ -29,12 +31,16 @@ impl From<Avatar> for AssetSummary {
             dependencies: asset.description.dependencies,
             booth_item_id: asset.description.booth_item_id,
             published_at: asset.description.published_at,
+            category: None,
+            tags: asset.description.tags,
         }
     }
 }
 
 impl From<AvatarWearable> for AssetSummary {
     fn from(asset: AvatarWearable) -> Self {
+        let category = asset.category;
+
         Self {
             id: asset.id,
             asset_type: AssetType::AvatarWearable,
@@ -45,12 +51,16 @@ impl From<AvatarWearable> for AssetSummary {
             dependencies: asset.description.dependencies,
             booth_item_id: asset.description.booth_item_id,
             published_at: asset.description.published_at,
+            category: (!category.is_empty()).then_some(category),
+            tags: asset.description.tags,
         }
     }
 }
 
 impl From<WorldObject> for AssetSummary {
     fn from(asset: WorldObject) -> Self {
+        let category = asset.category;
+
         Self {
             id: asset.id,
             asset_type: AssetType::WorldObject,
@@ -61,12 +71,16 @@ impl From<WorldObject> for AssetSummary {
             dependencies: asset.description.dependencies,
             booth_item_id: asset.description.booth_item_id,
             published_at: asset.description.published_at,
+            category: (!category.is_empty()).then_some(category),
+            tags: asset.description.tags,
         }
     }
 }
 
 impl From<OtherAsset> for AssetSummary {
     fn from(asset: OtherAsset) -> Self {
+        let category = asset.category;
+
         Self {
             id: asset.id,
             asset_type: AssetType::OtherAsset,
@@ -77,6 +91,8 @@ impl From<OtherAsset> for AssetSummary {
             dependencies: asset.description.dependencies,
             booth_item_id: asset.description.booth_item_id,
             published_at: asset.description.published_at,
+            category: (!category.is_empty()).then_some(category),
+            tags: asset.description.tags,
         }
     }
 }

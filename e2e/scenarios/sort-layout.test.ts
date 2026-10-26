@@ -30,6 +30,9 @@ test(
       previousWidth = await browser.$(card('Aster')).getSize('width')
       assert.ok(previousWidth > 0)
     }
+    await browser.$(card('Blouse')).$('span=衣装').waitForDisplayed()
+    await browser.$(card('Aster')).$('span=赤').waitForDisplayed()
+    await browser.$(card('Aster')).$('span=共通').waitForDisplayed()
     for (const [sort, names] of [
       [
         '追加順 (新しいものから)',

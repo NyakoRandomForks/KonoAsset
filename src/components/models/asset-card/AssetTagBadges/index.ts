@@ -1,0 +1,1 @@
+export { AssetTagBadges } from './AssetTagBadges'

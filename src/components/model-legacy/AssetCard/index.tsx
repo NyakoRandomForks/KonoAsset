@@ -1,6 +1,6 @@
 import { useLocalization } from '@/hooks/use-localization'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
-import { RefObject, useCallback } from 'react'
+import { RefObject } from 'react'
 import { AssetSummary } from '@/lib/bindings'
 import { AssetCardOpenButton } from '@/components/model-legacy/action-buttons/AssetCardOpenButton'
 import { Button } from '@/components/ui/button'
@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils'
 import { useAssetSummaryViewStore } from '@/stores/AssetSummaryViewStore'
 import { useAssetFilterStore } from '@/stores/AssetFilterStore'
 import { AssetCardTypeBadge } from '@/components/models/asset-card/AssetCardTypeBadge'
+import { AssetCardCategoryBadge } from '@/components/models/asset-card/AssetCardCategoryBadge'
 import { useMemoDialogStore } from '@/stores/dialogs/MemoDialogStore'
 import { AssetCardMeatballMenu } from '@/components/models/asset-card/AssetCardMeatballMenu'
 import { SquareImage } from '@/components/models/square-image/SquareImage'
@@ -23,17 +24,9 @@ export const AssetCard = ({ asset, ref, openEditAssetDialog }: Props) => {
   const { t } = useLocalization()
   const updateFilter = useAssetFilterStore((state) => state.updateFilter)
   const displayStyle = useAssetSummaryViewStore((state) => state.displayStyle)
+  const category = asset.category
 
   const openMemoDialog = useMemoDialogStore((state) => state.open)
-
-  const onShopNameClicked = useCallback(() => {
-    updateFilter({
-      text: {
-        mode: 'advanced',
-        advancedCreatorQuery: asset.creator,
-      },
-    })
-  }, [updateFilter, asset.creator])
 
   return (
     <Card
@@ -71,12 +64,20 @@ export const AssetCard = ({ asset, ref, openEditAssetDialog }: Props) => {
           >
             {asset.name}
           </CardTitle>
-          <p
-            className="text-sm font-normal select-text cursor-pointer text-muted-foreground truncate"
-            onClick={onShopNameClicked}
-          >
-            {asset.creator}
-          </p>
+          {category !== null && (
+            <AssetCardCategoryBadge
+              className="mt-1"
+              category={category}
+              onClick={() =>
+                updateFilter({
+                  category: {
+                    type: 'OR',
+                    filters: [category],
+                  },
+                })
+              }
+            />
+          )}
         </div>
         <div className="flex flex-row w-full mt-2 space-x-2 shrink-0">
           <AssetCardOpenButton

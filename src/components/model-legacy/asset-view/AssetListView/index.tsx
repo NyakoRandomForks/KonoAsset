@@ -6,6 +6,7 @@ import { NotebookText } from 'lucide-react'
 import { RowVirtualScroll } from '@/components/ui/virtual-scroll'
 import { useMemoDialogStore } from '@/stores/dialogs/MemoDialogStore'
 import { AssetCardMeatballMenu } from '@/components/models/asset-card/AssetCardMeatballMenu'
+import { useAssetFilterStore } from '@/stores/AssetFilterStore'
 
 type Props = {
   sortedAssetSummary: AssetSummary[]
@@ -17,9 +18,17 @@ export const AssetListView = ({
   openEditAssetDialog,
 }: Props) => {
   const openMemoDialog = useMemoDialogStore((state) => state.open)
+  const updateFilter = useAssetFilterStore((state) => state.updateFilter)
 
   const renderAssetItem = (asset: AssetSummary) => (
-    <SlimAssetDetail key={asset.id} asset={asset}>
+    <SlimAssetDetail
+      key={asset.id}
+      asset={asset}
+      showTags
+      onCategoryClick={(category) =>
+        updateFilter({ category: { type: 'OR', filters: [category] } })
+      }
+    >
       <div className="flex flex-row items-center gap-4">
         {asset.hasMemo && (
           <Button
