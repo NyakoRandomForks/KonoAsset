@@ -23,12 +23,12 @@
     "general:clear-filter": "清除筛选条件",
     "general:show-all": "显示全部",
 
-    "general:typeavatar": "虚拟形象",
-    "general:typeavatar-multiple": "虚拟形象",
-    "general:typeavatarwearable": "虚拟形象相关",
-    "general:typeavatarwearable-multiple": "虚拟形象相关",
-    "general:typeworldobject": "世界预制件",
-    "general:typeworldobject-multiple": "世界预制件",
+    "general:typeavatar": "底模",
+    "general:typeavatar-multiple": "底模",
+    "general:typeavatarwearable": "组件",
+    "general:typeavatarwearable-multiple": "组件",
+    "general:typeworldobject": "世界",
+    "general:typeworldobject-multiple": "世界",
     "general:typeotherasset": "其他",
     "general:typeotherasset-multiple": "其他",
 
