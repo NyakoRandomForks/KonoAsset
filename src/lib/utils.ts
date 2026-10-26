@@ -10,26 +10,36 @@ const shopBoothUrlCaptureRegex =
   /^https:\/\/[0-9a-z-]+\.booth\.pm\/items\/([0-9]+)(?:\?.*)?$/
 const defaultBoothUrlCaptureRegex =
   /^https:\/\/booth\.pm\/[a-z-]{2,5}\/items\/([0-9]+)(?:\?.*)?$/
+const boothItemIdRegex = /^[0-9]+$/
 
 export function isBoothURL(url: string) {
+  const trimmed = url.trim()
   return (
-    defaultBoothUrlCaptureRegex.test(url) || shopBoothUrlCaptureRegex.test(url)
+    boothItemIdRegex.test(trimmed) ||
+    defaultBoothUrlCaptureRegex.test(trimmed) ||
+    shopBoothUrlCaptureRegex.test(trimmed)
   )
 }
 
 export const extractBoothItemId = (
   url: string,
 ): { status: 'ok'; data: number } | { status: 'error'; error: string } => {
-  if (!isBoothURL(url)) {
+  const trimmed = url.trim()
+
+  if (boothItemIdRegex.test(trimmed)) {
+    return { status: 'ok', data: parseInt(trimmed, 10) }
+  }
+
+  if (!isBoothURL(trimmed)) {
     return { status: 'error', error: 'Invalid Booth URL specified' }
   }
 
-  const shopMatch = url.match(shopBoothUrlCaptureRegex)
+  const shopMatch = trimmed.match(shopBoothUrlCaptureRegex)
   if (shopMatch) {
     return { status: 'ok', data: parseInt(shopMatch[1], 10) }
   }
 
-  const defaultMatch = url.match(defaultBoothUrlCaptureRegex)
+  const defaultMatch = trimmed.match(defaultBoothUrlCaptureRegex)
   if (defaultMatch) {
     return { status: 'ok', data: parseInt(defaultMatch[1], 10) }
   }

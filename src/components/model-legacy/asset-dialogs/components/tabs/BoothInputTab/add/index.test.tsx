@@ -74,7 +74,7 @@ describe('BoothInputTab', () => {
     expect(moveToNextTab).toHaveBeenCalledOnce()
 
     const inputTarget = screen.getByPlaceholderText(
-      'https://booth.pm/ja/items/6641548',
+      '<id> / https://booth.pm/ja/items/<id>',
     )
 
     // Check input change works correctly
@@ -124,6 +124,38 @@ describe('BoothInputTab', () => {
     mockUseBoothInputTab.mockReturnValueOnce({
       ...base,
       boothUrlInput: 'https://booth.pm/ja/items/1234567',
+    })
+
+    render(
+      <Dialog open={true}>
+        <DialogContent>
+          <BoothInputTabForAddDialog
+            // @ts-expect-error type check fails but it satisfies the required fields
+            form={mockForm}
+            setTab={mockSetTab}
+          />
+        </DialogContent>
+      </Dialog>,
+    )
+
+    expect(
+      screen
+        .getByText('addasset:booth-input:button-text')
+        .hasAttribute('disabled'),
+    ).toBe(false)
+  })
+
+  it('renders fetch button as enabled when item ID with spaces is input', async () => {
+    const mockForm = {
+      watch: vi.fn().mockReturnValue('Avatar'),
+      setValue: vi.fn(),
+    }
+    const mockSetTab = vi.fn()
+
+    const mockUseBoothInputTab = useBoothInputTabForAddDialog as Mock
+    mockUseBoothInputTab.mockReturnValueOnce({
+      ...base,
+      boothUrlInput: ' 1234567 ',
     })
 
     render(

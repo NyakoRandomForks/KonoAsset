@@ -20,6 +20,12 @@ describe.concurrent('utils', () => {
       ),
     ).toBe(true)
     expect(isBoothURL('https://example.booth.pm/items/123?ref=kono')).toBe(true)
+    // アイテムIDのみ
+    expect(isBoothURL('123')).toBe(true)
+    expect(isBoothURL('987654')).toBe(true)
+    // 前後の空白
+    expect(isBoothURL(' 123 ')).toBe(true)
+    expect(isBoothURL(' https://booth.pm/ja/items/123 ')).toBe(true)
 
     // 異常
     expect(isBoothURL('https://booth.pm/ja/items/abcdefg')).toBe(false)
@@ -29,6 +35,9 @@ describe.concurrent('utils', () => {
     expect(isBoothURL('https://booth.pm/long-language-code/items/123')).toBe(
       false,
     )
+    expect(isBoothURL('')).toBe(false)
+    expect(isBoothURL('   ')).toBe(false)
+    expect(isBoothURL('abc')).toBe(false)
   })
 
   it('executes extractBoothItemId correctly', () => {
@@ -40,6 +49,20 @@ describe.concurrent('utils', () => {
     expect(extractBoothItemId('https://example.booth.pm/items/123')).toEqual({
       status: 'ok',
       data: 123,
+    })
+    // アイテムIDのみ
+    expect(extractBoothItemId('123')).toEqual({
+      status: 'ok',
+      data: 123,
+    })
+    // 前後の空白
+    expect(extractBoothItemId(' 456 ')).toEqual({
+      status: 'ok',
+      data: 456,
+    })
+    expect(extractBoothItemId(' https://booth.pm/ja/items/789 ')).toEqual({
+      status: 'ok',
+      data: 789,
     })
     // クエリパラメータ付き
     expect(
@@ -63,6 +86,10 @@ describe.concurrent('utils', () => {
       error: 'Invalid Booth URL specified',
     })
     expect(extractBoothItemId('https://example.com/ja/items/123')).toEqual({
+      status: 'error',
+      error: 'Invalid Booth URL specified',
+    })
+    expect(extractBoothItemId('   ')).toEqual({
       status: 'error',
       error: 'Invalid Booth URL specified',
     })
