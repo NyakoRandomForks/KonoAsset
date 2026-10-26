@@ -28,7 +28,6 @@ export const DependencyInput: FC<Props> = ({
         <Label>{t('general:prerequisite-assets')}</Label>
         <AssetSelector
           assets={sortedAssetSummaries}
-          slimAssetDetailClassName="max-w-[570px]"
           ignoredAssetIds={dependencies}
           onSelected={(id) => {
             setDependencies([...dependencies, id])

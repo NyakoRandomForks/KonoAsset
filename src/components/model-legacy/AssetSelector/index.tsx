@@ -52,14 +52,14 @@ export const AssetSelector: FC<Props> = ({
         <Search className="absolute top-2 left-2 text-foreground/50" />
         <div
           className={cn(
-            'absolute z-10 w-[calc(100%-16px)] h-96 top-12 bg-background rounded-lg border-2 border-border overflow-hidden',
+            'absolute z-10 w-[calc(100%-16px)] h-96 top-12 bg-background rounded-lg border-2 border-border p-2 overflow-hidden',
             'data-[side=bottom]:translate-y-1 data-[side=top]:-translate-y-1',
             !open && 'hidden',
           )}
           style={{ maxHeight: `${popoverMaxHeight}px` }}
         >
           <ScrollArea
-            className="h-full w-full pr-2"
+            className="h-full w-full [&_[data-radix-scroll-area-viewport]>div]:!block"
             style={{ maxHeight: `${popoverMaxHeight}px` }}
           >
             {assets.map((item) => {
@@ -76,7 +76,7 @@ export const AssetSelector: FC<Props> = ({
                   key={item.id}
                   asset={item}
                   className={cn(
-                    'w-full bg-background rounded-none border-x-0',
+                    'w-full bg-background mb-2',
                     slimAssetDetailClassName,
                   )}
                 >
