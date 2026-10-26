@@ -22,7 +22,7 @@ export const AssetTagBadges: FC<Props> = ({ className, tags }) => {
       {tags.map((tag, index) => (
         <Badge
           key={`${tag}-${index}`}
-          variant="outline"
+          variant="secondary"
           className="max-w-40 shrink-0 truncate"
           title={tag}
         >

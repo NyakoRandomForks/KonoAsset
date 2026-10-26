@@ -17,7 +17,7 @@ export const AssetCardCategoryBadge: FC<Props> = ({
     <Badge
       variant="secondary"
       className={cn(
-        'block truncate select-none shrink',
+        'block truncate select-none shrink bg-[#2196f3] text-white',
         onClick && 'cursor-pointer',
         className,
       )}

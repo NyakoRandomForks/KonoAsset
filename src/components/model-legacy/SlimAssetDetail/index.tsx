@@ -4,6 +4,7 @@ import { AssetSummary } from '@/lib/bindings'
 import { cn } from '@/lib/utils'
 import { FC, ReactNode } from 'react'
 import { AssetCardCategoryBadge } from '@/components/models/asset-card/AssetCardCategoryBadge'
+import { assetTypeBorderClassName } from '@/components/models/asset-card/assetTypeBorder'
 import { AssetTagBadges } from '@/components/models/asset-card/AssetTagBadges'
 
 type Props = {
@@ -26,17 +27,12 @@ export const SlimAssetDetail: FC<Props> = ({
   return (
     <Card
       data-asset-id={asset.id}
-      className={cn('w-full flex flex-row p-2 space-x-4 gap-0', className)}
+      className={cn(
+        'w-full flex flex-row p-2 space-x-4 gap-0',
+        assetTypeBorderClassName[asset.assetType],
+        className,
+      )}
     >
-      <div
-        className={cn(
-          'w-2 h-12 rounded-full',
-          asset.assetType === 'Avatar' && 'bg-avatar',
-          asset.assetType === 'AvatarWearable' && 'bg-avatar-wearable',
-          asset.assetType === 'WorldObject' && 'bg-world-object',
-          asset.assetType === 'OtherAsset' && 'bg-other-asset',
-        )}
-      />
       <div className="w-12 h-12">
         <SquareImage
           assetType={asset.assetType}

@@ -8,8 +8,8 @@ import { NotebookText } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useAssetSummaryViewStore } from '@/stores/AssetSummaryViewStore'
 import { useAssetFilterStore } from '@/stores/AssetFilterStore'
-import { AssetCardTypeBadge } from '@/components/models/asset-card/AssetCardTypeBadge'
 import { AssetCardCategoryBadge } from '@/components/models/asset-card/AssetCardCategoryBadge'
+import { assetTypeBorderClassName } from '@/components/models/asset-card/assetTypeBorder'
 import { useMemoDialogStore } from '@/stores/dialogs/MemoDialogStore'
 import { AssetCardMeatballMenu } from '@/components/models/asset-card/AssetCardMeatballMenu'
 import { SquareImage } from '@/components/models/square-image/SquareImage'
@@ -30,7 +30,10 @@ export const AssetCard = ({ asset, ref, openEditAssetDialog }: Props) => {
 
   return (
     <Card
-      className="w-full bg-card m-1 py-0"
+      className={cn(
+        'w-full bg-card m-1 py-0',
+        assetTypeBorderClassName[asset.assetType],
+      )}
       ref={ref}
       data-asset-id={asset.id}
     >
@@ -40,12 +43,8 @@ export const AssetCard = ({ asset, ref, openEditAssetDialog }: Props) => {
             assetType={asset.assetType}
             filename={asset.imageFilename ?? undefined}
           />
-          <div className="mt-2 h-8 w-full flex flex-row justify-between items-center gap-2">
-            <AssetCardTypeBadge
-              type={asset.assetType}
-              onClick={() => updateFilter({ assetType: asset.assetType })}
-            />
-            {asset.hasMemo && (
+          {asset.hasMemo && (
+            <div className="mt-2 flex w-full flex-row justify-end">
               <Button
                 aria-label={t('general:memo')}
                 variant="outline"
@@ -54,8 +53,8 @@ export const AssetCard = ({ asset, ref, openEditAssetDialog }: Props) => {
               >
                 <NotebookText />
               </Button>
-            )}
-          </div>
+            </div>
+          )}
           <CardTitle
             className={cn(
               'text-lg mt-2 wrap-break-word whitespace-pre-wrap line-clamp-2',
