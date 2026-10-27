@@ -26,9 +26,6 @@ export const MemoInput: FC<Props> = ({
           className={`resize-none ${textareaClassName}`}
           placeholder={t('addasset:memo:placeholder')}
         />
-        <p className="text-muted-foreground text-sm">
-          {t('addasset:memo:explanation-text')}
-        </p>
       </div>
     </div>
   )

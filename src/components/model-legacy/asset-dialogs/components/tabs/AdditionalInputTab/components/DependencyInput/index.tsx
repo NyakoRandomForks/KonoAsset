@@ -69,9 +69,6 @@ export const DependencyInput: FC<Props> = ({
             </ScrollArea>
           )}
         </div>
-        <p className="text-muted-foreground text-sm">
-          {t('addasset:prerequisite-assets:explanation-text')}
-        </p>
       </div>
     </div>
   )

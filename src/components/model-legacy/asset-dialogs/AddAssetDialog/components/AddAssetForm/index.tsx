@@ -55,15 +55,15 @@ export const AddAssetForm = ({
   }
 
   return (
-    <div className="flex max-h-[75vh] flex-col">
+    <div className="flex max-h-[85vh] flex-col">
       <DialogHeader className="mb-4">
         <DialogTitle>{t('addasset:add-asset')}</DialogTitle>
         <DialogDescription className="sr-only">
           {t('addasset:add-asset')}
         </DialogDescription>
       </DialogHeader>
-      <div className="min-h-0 flex-1 space-y-6 overflow-y-auto pr-1">
-        <section className="space-y-4">
+      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto pr-1">
+        <section className="space-y-2">
           <BoothInputTabForAddDialog
             form={form}
             setTab={setTab}
@@ -71,11 +71,10 @@ export const AddAssetForm = ({
           />
         </section>
         <Separator />
-        <section className="space-y-4">
+        <section className="space-y-2 pe-5">
           <ManualInputSection form={form} imageUrls={imageUrls} />
         </section>
-        <Separator />
-        <section className="space-y-4">
+        <section className="space-y-2">
           <AdditionalInputSection
             memo={memo}
             setMemo={setMemo}

@@ -65,13 +65,15 @@ export const ManualInputSection = ({ form, imageUrls }: Props) => {
             <Label>{t('addasset:select-type')}</Label>
             <CompactAssetTypeSelector form={form} />
           </div>
+          <div className="space-y-2">
+            {assetType === 'Avatar' && <AvatarLayout form={form} />}
+            {assetType === 'AvatarWearable' && <AvatarWearableLayout form={form} />}
+            {assetType === 'WorldObject' && <WorldObjectLayout form={form} />}
+            {assetType === 'OtherAsset' && <OtherAssetLayout form={form} />}
+          </div>
         </div>
       </div>
 
-      {assetType === 'Avatar' && <AvatarLayout form={form} />}
-      {assetType === 'AvatarWearable' && <AvatarWearableLayout form={form} />}
-      {assetType === 'WorldObject' && <WorldObjectLayout form={form} />}
-      {assetType === 'OtherAsset' && <OtherAssetLayout form={form} />}
     </div>
   )
 }

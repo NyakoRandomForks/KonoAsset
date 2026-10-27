@@ -16,11 +16,11 @@ export const AdditionalInputSection = ({
 }: Props) => {
   return (
     <div>
-      <MemoInput memo={memo ?? ''} setMemo={setMemo} textareaClassName="h-20" />
       <DependencyInput
         dependencies={dependencies}
         setDependencies={setDependencies}
       />
+      <MemoInput memo={memo ?? ''} setMemo={setMemo} textareaClassName="h-20" />
     </div>
   )
 }
