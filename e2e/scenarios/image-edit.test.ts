@@ -43,7 +43,6 @@ test(
         }),
       { timeoutMsg: '選択画像が編集画面に表示されませんでした' },
     )
-    await browser.$(button('次へ', '//*[@role="dialog"]')).click()
     await browser.$(button('アセットを更新', '//*[@role="dialog"]')).click()
     await browser.$('[role="dialog"]').waitForDisplayed({ reverse: true })
     const saved = JSON.parse(

@@ -7,7 +7,6 @@ import { useLocalization } from '@/hooks/use-localization'
 
 type Props = {
   form: AssetFormType
-  goToNextTab: () => void
   setImageUrls: (imageUrls: string[]) => void
 }
 
@@ -20,7 +19,6 @@ type ReturnProps = {
 
 export const useBoothInputTabForEditDialog = ({
   form,
-  goToNextTab,
   setImageUrls,
 }: Props): ReturnProps => {
   const formBoothItemId = form.getValues('boothItemId')
@@ -48,9 +46,7 @@ export const useBoothInputTabForEditDialog = ({
         setImageUrls,
       })
 
-      if (result.status === 'ok') {
-        goToNextTab()
-      } else {
+      if (result.status === 'error') {
         toast({
           title: t('addasset:booth-input:failed-to-get-info'),
           description: result.error,

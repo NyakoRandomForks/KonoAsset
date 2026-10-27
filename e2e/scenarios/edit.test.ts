@@ -66,7 +66,6 @@ test(
     await browser
       .$('[role="dialog"] [role="option"][data-value="Birch"]')
       .click()
-    await browser.$(button('次へ', '//*[@role="dialog"]')).click()
     await replaceInput(browser, 'textarea', '編集したメモ\n2行目')
     await browser
       .$('input[placeholder="前提アセットを検索..."]')
@@ -92,7 +91,6 @@ test(
         .getValue(),
       'Coat 改',
     )
-    await browser.$(button('次へ', '//*[@role="dialog"]')).click()
     assert.equal(await browser.$('textarea').getValue(), '編集したメモ\n2行目')
     await browser.$(`[role="dialog"] ${card('Desk')}`).waitForDisplayed()
     await browser.keys('Escape')

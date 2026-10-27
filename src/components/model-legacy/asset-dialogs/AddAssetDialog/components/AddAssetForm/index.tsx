@@ -55,7 +55,7 @@ export const AddAssetForm = ({
   }
 
   return (
-    <div className="flex max-h-[85vh] flex-col">
+    <div className="flex max-h-[calc(85vh-3rem)] flex-col">
       <DialogHeader className="mb-4">
         <DialogTitle>{t('addasset:add-asset')}</DialogTitle>
         <DialogDescription className="sr-only">

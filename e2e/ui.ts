@@ -87,8 +87,6 @@ export async function assetMenu(
 
 export async function manualEdit(browser: Browser, name: string) {
   await assetMenu(browser, name, '情報を編集')
-  await browser.$(button('スキップする', '//*[@role="dialog"]')).click()
-  await browser.$(button('次へ', '//*[@role="dialog"]')).click()
   await browser
     .$('input[placeholder="アセットの名前を入力..."]')
     .waitForDisplayed()

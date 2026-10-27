@@ -1,14 +1,9 @@
 import { TabsContent } from '@/components/ui/tabs'
-import { ManualInputTab } from '../components/tabs/ManualInputTab'
 import { useEditAssetDialog } from './hook'
 import { DialogWrapper } from '../components/DialogWrapper'
-import { BoothInputTabForEditDialog } from '../components/tabs/BoothInputTab/edit'
-import { AdditionalInputTab } from '../components/tabs/AdditionalInputTab'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useLocalization } from '@/hooks/use-localization'
-import { DialogTitle } from '@/components/ui/dialog'
-import { DialogDescription } from '@radix-ui/react-dialog'
-import { AssetTypeSelectorTab } from '../components/tabs/AssetTypeSelector'
+import { DialogDescription, DialogTitle } from '@/components/ui/dialog'
+import { EditAssetForm } from './components/EditAssetForm'
 
 type Props = {
   id: string | null
@@ -32,8 +27,6 @@ export const EditAssetDialog = ({ id, dialogOpen, setDialogOpen }: Props) => {
     setDialogOpen,
   })
 
-  const { t } = useLocalization()
-
   return (
     <DialogWrapper
       dialogOpen={dialogOpen}
@@ -41,6 +34,7 @@ export const EditAssetDialog = ({ id, dialogOpen, setDialogOpen }: Props) => {
       tab={loadingAssetData ? 'loading' : tab}
       setTab={setTab}
       hideTrigger
+      contentClassName="max-h-[85vh] max-w-[75vw]"
     >
       <TabsContent value="loading">
         <DialogTitle className="hidden" />
@@ -52,44 +46,14 @@ export const EditAssetDialog = ({ id, dialogOpen, setDialogOpen }: Props) => {
         <Skeleton className="mt-6 mx-auto w-24 h-10 rounded-sm" />
         <Skeleton className="mt-4 w-20 h-8 rounded-sm" />
       </TabsContent>
-      <TabsContent value="booth-input">
-        <BoothInputTabForEditDialog
-          form={form}
-          closeDialog={() => setDialogOpen(false)}
-          goToNextTab={() => setTab('asset-type-selector')}
-          setImageUrls={setImageUrls}
-          tabIndex={1}
-          totalTabs={4}
-        />
-      </TabsContent>
-      <TabsContent value="asset-type-selector">
-        <AssetTypeSelectorTab
-          form={form}
-          setTab={setTab}
-          tabIndex={2}
-          totalTabs={4}
-        />
-      </TabsContent>
-      <TabsContent value="manual-input">
-        <ManualInputTab
+      <TabsContent value="form">
+        <EditAssetForm
           form={form}
           imageUrls={imageUrls}
-          onBackToPreviousTabClicked={() => setTab('asset-type-selector')}
-          onGoToNextTabClicked={() => setTab('additional-input')}
-          tabIndex={3}
-          totalTabs={4}
-        />
-      </TabsContent>
-      <TabsContent value="additional-input">
-        <AdditionalInputTab
-          form={form}
-          onBackToPreviousTabClicked={() => setTab('manual-input')}
+          setImageUrls={setImageUrls}
+          closeDialog={() => setDialogOpen(false)}
           onSubmit={onSubmit}
           submitting={submitting}
-          tabIndex={4}
-          totalTabs={4}
-          hideDeleteSourceCheckbox
-          submitButtonText={t('addasset:update-asset')}
         />
       </TabsContent>
     </DialogWrapper>

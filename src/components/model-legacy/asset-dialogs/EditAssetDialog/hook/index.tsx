@@ -46,7 +46,7 @@ export const useEditAssetDialog = ({
   dialogOpen,
   setDialogOpen,
 }: Props): ReturnProps => {
-  const [tab, setTab] = useState('booth-input')
+  const [tab, setTab] = useState('form')
   const [imageUrls, setImageUrls] = useState<string[]>([])
   const [loadingAssetData, setLoadingAssetData] = useState(true)
   const [submitting, setSubmitting] = useState(false)
@@ -121,13 +121,13 @@ export const useEditAssetDialog = ({
   useEffect(() => {
     if (dialogOpen) {
       clearForm()
-      setTab('booth-input')
+      setTab('form')
       setLoadingAssetData(true)
     } else {
       // 閉じるときにタブが変わってしまうのが見えるため遅延を入れる
       const timer = setTimeout(() => {
         clearForm()
-        setTab('booth-input')
+        setTab('form')
         setLoadingAssetData(true)
       }, 500)
       return () => clearTimeout(timer)

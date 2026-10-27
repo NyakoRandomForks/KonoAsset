@@ -44,7 +44,6 @@ test(
     )
     await app.browser.$(button('トップ画面に戻る')).click()
     await manualEdit(app.browser, 'Coat')
-    await app.browser.$(button('次へ', '//*[@role="dialog"]')).click()
     assert.equal(await app.browser.$('textarea').getValue(), 'Coat のメモ')
     await app.browser.$(button('アセットを更新', '//*[@role="dialog"]')).click()
     await app.browser.$('[role="dialog"]').waitForDisplayed({ reverse: true })

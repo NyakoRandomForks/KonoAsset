@@ -1,10 +1,4 @@
 import { Button } from '@/components/ui/button'
-import {
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { ChevronRight, Loader2 } from 'lucide-react'
@@ -15,22 +9,10 @@ import { useLocalization } from '@/hooks/use-localization'
 
 type Props = {
   form: AssetFormType
-  closeDialog: () => void
-  goToNextTab: () => void
   setImageUrls: (imageUrls: string[]) => void
-
-  tabIndex: number
-  totalTabs: number
 }
 
-export const BoothInputTabForEditDialog = ({
-  form,
-  closeDialog,
-  goToNextTab,
-  setImageUrls,
-  tabIndex,
-  totalTabs,
-}: Props) => {
+export const BoothInputTabForEditDialog = ({ form, setImageUrls }: Props) => {
   const { t } = useLocalization()
   const {
     getAssetDescriptionFromBooth,
@@ -39,59 +21,30 @@ export const BoothInputTabForEditDialog = ({
     boothUrlInput,
   } = useBoothInputTabForEditDialog({
     form,
-    goToNextTab,
     setImageUrls,
   })
 
   return (
-    <>
-      <DialogHeader>
-        <DialogTitle>
-          ({tabIndex}/{totalTabs}) {t('addasset:booth-edit')}
-        </DialogTitle>
-        <DialogDescription>
-          {t('addasset:booth-edit:explanation-text')}
-        </DialogDescription>
-      </DialogHeader>
-      <div className="my-8 space-y-6">
-        <div>
-          <Label className="text-base ml-1">
-            {t('addasset:booth-edit:overwrite')}
-          </Label>
-          <div className="flex flex-row items-center mt-1 space-x-2">
-            <Input
-              placeholder="<id> / https://booth.pm/ja/items/<id>"
-              value={boothUrlInput}
-              onChange={onUrlInputChange}
-              disabled={fetching}
-            />
-            <Button
-              disabled={fetching || !isBoothURL(boothUrlInput)}
-              onClick={() => getAssetDescriptionFromBooth()}
-              className="h-10 gap-1"
-            >
-              {!fetching && <ChevronRight size={16} />}
-              {fetching && <Loader2 size={16} className="animate-spin" />}
-              {t('addasset:booth-input:button-text')}
-            </Button>
-          </div>
-        </div>
-        <div className="w-full flex justify-center"> {t('general:or')} </div>
-        <div className="flex justify-center">
-          <Button
-            className="block w-48 h-12"
-            variant={'outline'}
-            onClick={goToNextTab}
-          >
-            {t('addasset:booth-edit:do-not-change')}
-          </Button>
-        </div>
-      </div>
-      <DialogFooter>
-        <Button variant="outline" className="mr-auto" onClick={closeDialog}>
-          {t('general:button:cancel')}
+    <div className="space-y-2">
+      <Label className="text-base">{t('addasset:booth-edit:overwrite')}</Label>
+      <div className="flex flex-row items-center gap-2">
+        <Input
+          className="max-w-xs"
+          placeholder="<id> / https://booth.pm/ja/items/<id>"
+          value={boothUrlInput}
+          onChange={onUrlInputChange}
+          disabled={fetching}
+        />
+        <Button
+          disabled={fetching || !isBoothURL(boothUrlInput)}
+          onClick={() => getAssetDescriptionFromBooth()}
+          className="h-10 shrink-0 gap-1"
+        >
+          {!fetching && <ChevronRight size={16} />}
+          {fetching && <Loader2 size={16} className="animate-spin" />}
+          {t('addasset:booth-input:button-text')}
         </Button>
-      </DialogFooter>
-    </>
+      </div>
+    </div>
   )
 }

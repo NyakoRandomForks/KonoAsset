@@ -43,7 +43,6 @@ test(
     await browser.$('[role="alertdialog"]').waitForDisplayed({ reverse: true })
     await expectAssets(browser, ['Aster', 'Blouse', 'Desk', 'Effect'])
     await manualEdit(browser, 'Blouse')
-    await browser.$(button('次へ', '//*[@role="dialog"]')).click()
     await browser.$('p=選択されていません').waitForDisplayed()
     await browser.keys('Escape')
     await browser.$('[role="dialog"]').waitForDisplayed({ reverse: true })
