@@ -11,6 +11,7 @@ const shopBoothUrlCaptureRegex =
 const defaultBoothUrlCaptureRegex =
   /^https:\/\/booth\.pm\/[a-z-]{2,5}\/items\/([0-9]+)(?:\?.*)?$/
 const boothItemIdRegex = /^[0-9]+$/
+const boothItemIdPrefixRegex = /^([0-9]+)[-_ ]/
 
 export function isBoothURL(url: string) {
   const trimmed = url.trim()
@@ -45,6 +46,16 @@ export const extractBoothItemId = (
   }
 
   return { status: 'error', error: 'Failed to parse booth URL' }
+}
+
+export const extractBoothItemIdFromName = (name: string): number | null => {
+  const match = name.match(boothItemIdPrefixRegex)
+
+  if (match === null) {
+    return null
+  }
+
+  return parseInt(match[1], 10)
 }
 
 export const convertToBoothURL = (boothItemId: number) => {

@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { convertToBoothURL, extractBoothItemId, isBoothURL } from './utils'
+import {
+  convertToBoothURL,
+  extractBoothItemId,
+  extractBoothItemIdFromName,
+  isBoothURL,
+} from './utils'
 
 describe.concurrent('utils', () => {
   it('executes isBoothURL correctly', () => {
@@ -93,6 +98,22 @@ describe.concurrent('utils', () => {
       status: 'error',
       error: 'Invalid Booth URL specified',
     })
+  })
+
+  it('executes extractBoothItemIdFromName correctly', () => {
+    // 正常
+    expect(extractBoothItemIdFromName('12345_name')).toBe(12345)
+    expect(extractBoothItemIdFromName('12345-name')).toBe(12345)
+    expect(extractBoothItemIdFromName('12345 name')).toBe(12345)
+    expect(extractBoothItemIdFromName('12345_folder_name')).toBe(12345)
+    expect(extractBoothItemIdFromName('00123_folder')).toBe(123)
+
+    // 異常
+    expect(extractBoothItemIdFromName('12345')).toBeNull()
+    expect(extractBoothItemIdFromName('12345name')).toBeNull()
+    expect(extractBoothItemIdFromName('name_12345')).toBeNull()
+    expect(extractBoothItemIdFromName('_12345_name')).toBeNull()
+    expect(extractBoothItemIdFromName('')).toBeNull()
   })
 
   it('executes convertToBoothURL correctly', () => {

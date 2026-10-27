@@ -1,5 +1,9 @@
-import { convertToBoothURL, extractBoothItemId } from '@/lib/utils'
-import { useState, useContext, ChangeEvent } from 'react'
+import {
+  convertToBoothURL,
+  extractBoothItemId,
+  extractBoothItemIdFromName,
+} from '@/lib/utils'
+import { useState, useContext, useEffect, useRef, ChangeEvent } from 'react'
 import { AddAssetDialogContext } from '../../../../../AddAssetDialog'
 import { sep } from '@tauri-apps/api/path'
 import { AssetFormType } from '@/lib/form'
@@ -43,6 +47,36 @@ export const useBoothInputTabForAddDialog = ({
   const { assetPaths, setDuplicateWarningItems } = useContext(
     AddAssetDialogContext,
   )
+
+  const lastAutoFilledPathRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    const path = assetPaths?.[0]
+
+    if (path === undefined) {
+      return
+    }
+
+    if (lastAutoFilledPathRef.current === path) {
+      return
+    }
+
+    lastAutoFilledPathRef.current = path
+
+    if (formBoothItemId !== null || boothUrlInput !== '') {
+      return
+    }
+
+    const filename = path.split(sep()).pop() ?? ''
+    const extracted = extractBoothItemIdFromName(filename)
+
+    if (extracted === null) {
+      return
+    }
+
+    setBoothUrlInput(`${extracted}`)
+    setBoothItemId(extracted)
+  }, [assetPaths, boothUrlInput, formBoothItemId])
 
   const backToPreviousTab = () => {
     setTab('selector')
