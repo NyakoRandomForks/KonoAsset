@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, Mock, vi } from 'vitest'
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { cleanup, render, screen } from '@testing-library/react'
 import { BoothInputTabForAddDialog } from '.'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { useBoothInputTabForAddDialog } from './hook'
@@ -22,8 +22,6 @@ vi.mock('@/hooks/use-localization', () => {
 describe('BoothInputTab', () => {
   const getAssetDescriptionFromBooth = vi.fn()
   const onUrlInputChange = vi.fn()
-  const moveToNextTab = vi.fn()
-  const backToPreviousTab = vi.fn()
 
   const base = {
     representativeImportFilename: 'test',
@@ -32,8 +30,6 @@ describe('BoothInputTab', () => {
     onUrlInputChange,
     fetching: false,
     boothUrlInput: '',
-    moveToNextTab,
-    backToPreviousTab,
   }
 
   afterEach(() => {
@@ -41,7 +37,7 @@ describe('BoothInputTab', () => {
     vi.clearAllMocks()
   })
 
-  it('handles button clicks and keyboard input correctly', async () => {
+  it('handles keyboard input correctly', async () => {
     const mockForm = {
       watch: vi.fn().mockReturnValue('Avatar'),
       setValue: vi.fn(),
@@ -63,15 +59,7 @@ describe('BoothInputTab', () => {
       </Dialog>,
     )
 
-    const { backToPreviousTab, moveToNextTab, onUrlInputChange } = base
-
-    // Check back button works correctly
-    fireEvent.click(screen.getByText('general:button:back'))
-    expect(backToPreviousTab).toHaveBeenCalledOnce()
-
-    // Check skip button works correctly
-    fireEvent.click(screen.getByText('addasset:booth-input:manual-input'))
-    expect(moveToNextTab).toHaveBeenCalledOnce()
+    const { onUrlInputChange } = base
 
     const inputTarget = screen.getByPlaceholderText(
       '<id> / https://booth.pm/ja/items/<id>',

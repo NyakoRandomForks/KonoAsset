@@ -32,7 +32,9 @@ test(
     )
     await browser.$('li*=missing.txt').waitForDisplayed()
     await browser.$(button('戻る', '//*[@role="dialog"]')).click()
-    await browser.$('textarea').waitForDisplayed()
+    await browser
+      .$('input[placeholder="アセットの名前を入力..."]')
+      .waitForDisplayed()
     await browser.keys('Escape')
     await browser.$('[role="dialog"]').waitForDisplayed({ reverse: true })
     await browser.$('p=アセットが1つも登録されていません').waitForDisplayed()

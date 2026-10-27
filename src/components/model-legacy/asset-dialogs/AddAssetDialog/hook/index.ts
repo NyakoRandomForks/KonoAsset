@@ -170,7 +170,7 @@ export const useAddAssetDialog = ({
       clearFormRef.current()
 
       setAssetPaths(event.payload.paths)
-      setTab('booth-input')
+      setTab('form')
 
       openDialogWithoutClearFormRef.current()
 
@@ -387,7 +387,7 @@ export const useAddAssetDialog = ({
           setAssetPaths(path)
           form.setValue('boothItemId', boothItemId)
 
-          setTab('booth-input')
+          setTab('form')
 
           openDialogWithoutClearForm()
         })

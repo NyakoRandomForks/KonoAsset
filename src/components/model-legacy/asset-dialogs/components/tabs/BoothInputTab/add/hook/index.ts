@@ -24,8 +24,6 @@ type ReturnProps = {
   onUrlInputChange: (e: ChangeEvent<HTMLInputElement>) => void
   fetching: boolean
   boothUrlInput: string
-  moveToNextTab: () => void
-  backToPreviousTab: () => void
 }
 
 export const useBoothInputTabForAddDialog = ({
@@ -78,18 +76,6 @@ export const useBoothInputTabForAddDialog = ({
     setBoothItemId(extracted)
   }, [assetPaths, boothUrlInput, formBoothItemId])
 
-  const backToPreviousTab = () => {
-    setTab('selector')
-  }
-
-  const moveToNextTab = () => {
-    setTab('asset-type-selector')
-  }
-
-  const moveToDuplicationWarning = () => {
-    setTab('duplicate-warning')
-  }
-
   const getAssetDescriptionFromBooth = async () => {
     if (fetching || boothItemId === null) {
       return
@@ -107,11 +93,9 @@ export const useBoothInputTabForAddDialog = ({
       if (result.status === 'ok') {
         const data = result.data
 
-        if (data.goNext) {
-          moveToNextTab()
-        } else if (data.duplicated) {
+        if (data.duplicated) {
           setDuplicateWarningItems(data.duplicatedItems)
-          moveToDuplicationWarning()
+          setTab('duplicate-warning')
         }
       } else {
         toast({
@@ -151,7 +135,5 @@ export const useBoothInputTabForAddDialog = ({
     onUrlInputChange,
     fetching,
     boothUrlInput,
-    moveToNextTab,
-    backToPreviousTab,
   }
 }

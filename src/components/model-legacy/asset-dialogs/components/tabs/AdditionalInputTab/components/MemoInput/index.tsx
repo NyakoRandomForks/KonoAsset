@@ -6,9 +6,14 @@ import { FC } from 'react'
 type Props = {
   memo: string
   setMemo: (memo: string) => void
+  textareaClassName?: string
 }
 
-export const MemoInput: FC<Props> = ({ memo, setMemo }) => {
+export const MemoInput: FC<Props> = ({
+  memo,
+  setMemo,
+  textareaClassName = 'h-28',
+}) => {
   const { t } = useLocalization()
   return (
     <div className="w-full flex flex-row mb-4">
@@ -18,7 +23,7 @@ export const MemoInput: FC<Props> = ({ memo, setMemo }) => {
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
           autoComplete="off"
-          className="resize-none h-28"
+          className={`resize-none ${textareaClassName}`}
           placeholder={t('addasset:memo:placeholder')}
         />
         <p className="text-muted-foreground text-sm">

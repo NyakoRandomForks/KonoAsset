@@ -14,6 +14,7 @@ type Props = {
   setTab: (tab: string) => void
   hideTrigger?: boolean
   preventCloseOnOutsideClick?: boolean
+  contentClassName?: string
 }
 
 export const DialogWrapper: FC<Props> = ({
@@ -24,6 +25,7 @@ export const DialogWrapper: FC<Props> = ({
   children,
   hideTrigger = false,
   preventCloseOnOutsideClick = false,
+  contentClassName,
 }) => {
   const { t } = useLocalization()
   return (
@@ -45,6 +47,7 @@ export const DialogWrapper: FC<Props> = ({
         className={cn(
           'max-w-[650px]',
           tab === 'progress' && '[&>button]:hidden',
+          contentClassName,
         )}
         onInteractOutside={(event) => {
           if (preventCloseOnOutsideClick) {

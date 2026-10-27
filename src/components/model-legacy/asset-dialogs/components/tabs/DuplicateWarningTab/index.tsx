@@ -14,8 +14,8 @@ import { useDataManagementDialogStore } from '@/stores/dialogs/DataManagementDia
 type Props = {
   setTab: (tab: string) => void
 
-  tabIndex: number
-  totalTabs: number
+  tabIndex?: number
+  totalTabs?: number
 
   closeDialog: () => void
 }
@@ -48,14 +48,17 @@ export const DuplicateWarningTab = ({
     [assetPaths, openDataManagementDialog, importItems, closeDialog],
   )
 
-  const moveToPreviousTab = () => setTab('booth-input')
-  const moveToNextTab = () => setTab('asset-type-selector')
+  const moveToPreviousTab = () => setTab('form')
+  const moveToNextTab = () => setTab('form')
 
   return (
     <>
       <DialogHeader>
         <DialogTitle>
-          ({tabIndex}/{totalTabs}) {t('addasset:duplicate-warning')}
+          {tabIndex !== undefined && totalTabs !== undefined
+            ? `(${tabIndex}/${totalTabs}) `
+            : ''}
+          {t('addasset:duplicate-warning')}
         </DialogTitle>
         <DialogDescription>
           {t('addasset:duplicate-warning:explanation-text')}

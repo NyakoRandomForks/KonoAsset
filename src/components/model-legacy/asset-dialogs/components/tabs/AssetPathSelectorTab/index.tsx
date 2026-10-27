@@ -21,8 +21,8 @@ import { Route as PreferencePage } from '@/routes/preference'
 type Props = {
   setTab: (tab: string) => void
 
-  tabIndex: number
-  totalTabs: number
+  tabIndex?: number
+  totalTabs?: number
 }
 
 export const AssetPathSelectorTab = ({
@@ -54,7 +54,7 @@ export const AssetPathSelectorTab = ({
 
     if (path !== null) {
       setAssetPaths(path)
-      setTab('booth-input')
+      setTab('form')
     }
   }
 
@@ -67,7 +67,10 @@ export const AssetPathSelectorTab = ({
     <>
       <DialogHeader>
         <DialogTitle>
-          ({tabIndex}/{totalTabs}) {t('addasset:select-path')}
+          {tabIndex !== undefined && totalTabs !== undefined
+            ? `(${tabIndex}/${totalTabs}) `
+            : ''}
+          {t('addasset:select-path')}
         </DialogTitle>
         <DialogDescription>
           {t('addasset:select-path:explanation-text')}

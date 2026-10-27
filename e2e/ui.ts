@@ -109,14 +109,11 @@ export async function addManually(
       ),
     )
     .click()
-  await browser.$(button('自動取得をスキップ', '//*[@role="dialog"]')).click()
-  await browser.$(button(type, '//*[@role="dialog"]')).click()
-  await browser.$(button('次へ', '//*[@role="dialog"]')).click()
   await browser.$('input[placeholder="アセットの名前を入力..."]').setValue(name)
   await browser
     .$('input[placeholder="ショップの名前を入力..."]')
     .setValue('Local Shop')
-  await browser.$(button('次へ', '//*[@role="dialog"]')).click()
+  await browser.$(button(type, '//*[@role="dialog"]')).click()
   await browser.$('textarea').setValue(`${name} のメモ`)
 }
 

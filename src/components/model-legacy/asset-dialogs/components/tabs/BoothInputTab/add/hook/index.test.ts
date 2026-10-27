@@ -137,8 +137,7 @@ describe('BoothInputTab Hook', () => {
 
     await result.current.getAssetDescriptionFromBooth()
 
-    expect(mockSetTab).toHaveBeenCalledTimes(1)
-    expect(mockSetTab.mock.calls[0][0]).toEqual('asset-type-selector')
+    expect(mockSetTab).not.toHaveBeenCalled()
 
     // Duplication Case
     act(() => {
@@ -150,8 +149,8 @@ describe('BoothInputTab Hook', () => {
 
     await result.current.getAssetDescriptionFromBooth()
 
-    expect(mockSetTab).toHaveBeenCalledTimes(2)
-    expect(mockSetTab.mock.calls[1][0]).toEqual('duplicate-warning')
+    expect(mockSetTab).toHaveBeenCalledTimes(1)
+    expect(mockSetTab.mock.calls[0][0]).toEqual('duplicate-warning')
 
     // Error Case
     act(() => {
@@ -164,26 +163,6 @@ describe('BoothInputTab Hook', () => {
     await result.current.getAssetDescriptionFromBooth()
 
     expect(mockToast).toHaveBeenCalledOnce()
-  })
-
-  it('executes backToPreviousTab function correctly', async () => {
-    const mockForm = {
-      getValues: vi.fn().mockReturnValue(null),
-    }
-    const mockSetTab = vi.fn()
-
-    const { result } = renderHook(() =>
-      useBoothInputTabForAddDialog({
-        // @ts-expect-error mockForm is not a valid AssetFormType but satisfies the required fields
-        form: mockForm,
-        setTab: mockSetTab,
-      }),
-    )
-
-    result.current.backToPreviousTab()
-
-    expect(mockSetTab).toHaveBeenCalledTimes(1)
-    expect(mockSetTab.mock.calls[0][0]).toEqual('selector')
   })
 })
 

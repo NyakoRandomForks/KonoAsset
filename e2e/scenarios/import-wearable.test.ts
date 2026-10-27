@@ -6,7 +6,7 @@ test(
   { timeout: 90_000 },
   async (t) => {
     await importScenario(t, {
-      type: 'アバター関連 (服 / 髪 / アクセサリ / ギミック等)',
+      type: 'アバター関連アセット',
       metadata: 'avatarWearables',
       mode: 'folder',
     })
