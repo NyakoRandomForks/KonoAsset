@@ -55,7 +55,7 @@ export const AddAssetDialog = ({ dialogOpen, setDialogOpen }: Props) => {
       tab={tab}
       setTab={setTab}
       preventCloseOnOutsideClick
-      contentClassName="max-h-[85vh]"
+      contentClassName="max-h-[85vh] max-w-[75vw]"
     >
       <AddAssetDialogContext.Provider value={contextValue}>
         <TabsContent value="selector">

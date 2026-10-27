@@ -48,10 +48,10 @@ export const BoothInputTabForAddDialog = ({
         )}
       </p>
       <div className="space-y-2">
-        <Label className="text-base">
-          {t('addasset:booth-input:get-info')}
-        </Label>
         <div className="flex flex-row items-center gap-2">
+		  <Label className="text-base">
+		    {t('addasset:booth-input:get-info')}
+		  </Label>
           <Input
             className="max-w-xs"
             placeholder="<id> / https://booth.pm/ja/items/<id>"

@@ -27,21 +27,6 @@ type Props = {
   submitting: boolean
 }
 
-const SectionHeading = ({
-  title,
-  description,
-}: {
-  title: string
-  description: string
-}) => {
-  return (
-    <div className="space-y-1">
-      <h3 className="text-base font-semibold">{title}</h3>
-      <p className="text-sm text-muted-foreground">{description}</p>
-    </div>
-  )
-}
-
 export const AddAssetForm = ({
   form,
   imageUrls,
@@ -79,10 +64,6 @@ export const AddAssetForm = ({
       </DialogHeader>
       <div className="min-h-0 flex-1 space-y-6 overflow-y-auto pr-1">
         <section className="space-y-4">
-          <SectionHeading
-            title={t('addasset:booth-input')}
-            description={t('addasset:booth-input:explanation-text')}
-          />
           <BoothInputTabForAddDialog
             form={form}
             setTab={setTab}
@@ -91,18 +72,10 @@ export const AddAssetForm = ({
         </section>
         <Separator />
         <section className="space-y-4">
-          <SectionHeading
-            title={t('addasset:manual-input')}
-            description={t('addasset:manual-input:explanation-text')}
-          />
           <ManualInputSection form={form} imageUrls={imageUrls} />
         </section>
         <Separator />
         <section className="space-y-4">
-          <SectionHeading
-            title={t('addasset:additional-input')}
-            description={t('addasset:additional-input:explanation-text')}
-          />
           <AdditionalInputSection
             memo={memo}
             setMemo={setMemo}
